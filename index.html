@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="js/phaser.min.js"></script>
+        <script type="text/javascript" src="js/example1.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
+        <style>
+            body {
+                padding-left: 30%;
+                background-color: rgb(76, 161, 119);
+            }
+            #logo {
+                position: absolute;
+                left: 1%;
+            }
+            #logoWhite {
+                color: white;
+            }
+            #logoRed {
+                color: red;
+            }
+            #menu {
+                position: absolute;
+                left: 1%;
+                top: 10%;
+                background-color: azure;
+                border-radius: 10px;
+                width: 25%;
+            }
+            #menu li{
+                margin: 10px;
+                list-style-type: none;
+            }
+            #menu li button {
+                border: none;
+                color: rgb(44, 179, 167);
+                background-color: white;
+            }
+            #menu li button:hover {
+                border: none;
+                color: rgb(15, 53, 50);
+                background-color: white;
+            }
+            #instructions {
+                width: 500px;
+                min-height: 500px;
+                position: fixed;
+                background-color: white;
+                display: none;
+            }
+            #close {
+                float: right;
+                margin-right: 20px;
+                margin-top: 15px;
+                border: none;
+                color: red;
+                background-color: white;
+            }
+            #close:hover {
+                color: rgb(15, 53, 50);
+            }
+            .instruction1 {
+                margin-top: 60px;
+            }
+            .instructions {
+                margin-left: 10px;
+                color: rgb(44, 179, 167);
+            }
+            #menu a {
+                color: rgb(44, 179, 167);
+                text-decoration: none;
+                font-size: 18px;
+            }
+            #buttonInstructions {
+                font-size: 18px;
+                margin-left: -10px;
+            }
+        </style>
+    </head>
+<body>
+    <div>
+        <h1 id="logo"><span id="logoWhite">Check</span><span id="logoRed">ers</span></h1>
+        <ul id="menu">
+            <li><button onclick="showInstructions();" id="buttonInstructions">Instructions</button></li>
+            <li><a href="#">Source Code</a></li>
+        </ul>
+        <div id="instructions">
+            <button id="close" onclick="showInstructions();">Close</button>
+            <h3 class="instructions instruction1">Players</h3>
+            <ul>
+                <li>Two players are required to play the game</li>
+            </ul>
+            <h3 class="instructions">How to move a piece?</h3>
+            <ul>
+                <li>Select a piece and click on an empty square to move it</li>
+                <li>Pieces only move diagonally</li>
+                <li>a piece cannot jump unless you beating an opponent's piece</li>
+                <li>a piece won't reverse once you move it</li>
+                <li>once a piece reaches the last row it becomes a king and can move and beat in all directions</li>
+            </ul>
+            <h3 class="instructions">How to take opponent's piece?</h3>
+            <ul>
+                <li>You take their piece only when it's blocking your way by jumping it</li>
+                <li>Select a piece and click on an empty square behind the opponent's piece</ul>
+            </ul>
+            <h3 class="instructions">How to win the game?</h3>
+            <ul>
+                <li>You win by taking all your opponent's pieces</li>
+            </ul>
+            <h3 class="instructions">How to quit the game?</h3>
+            <ul>
+                <li>You quit the game by refreshing the page or clicking on the quit button.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function showInstructions() {
+            var displayIt = document.getElementById('instructions');
+            if(displayIt.style.display == 'block') {
+                displayIt.style.display = 'none';
+            }
+            else {
+                displayIt.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
