@@ -84,7 +84,7 @@ class example1 extends Phaser.Scene {
               }
       
             }
-            //adding pieces to the chess board
+            //adding pieces to the  board
             for (var p = 0; p < rectangles.length; p++) {
                 var pieces = this.add.sprite(rectangles[p].x, rectangles[p].y, 'oponentPiece1');
                 piece.push(pieces);
@@ -104,46 +104,46 @@ class example1 extends Phaser.Scene {
       
       
       
-      
+            //click on the piece to indicate which piece to move and update if the previous piece was clicked
             for (var i = 0; i < rectangles.length; i++) {
-              //click on the piece to indicate which piece to move
+              
               rectangles[i].on('pointerdown', function(){
-                if(this.playerInfo === 1) { //checking if the piece that is about to move belongs to player one
-                  if(clickHolder.length < 2) { // if there was no piece cliked before 
-                    clickHolder.push(this.x, this.y); //we wanna grab its parameters to be used later when comparing
+                if(this.playerInfo === 1) {
+                  if(clickHolder.length < 2) {
+                    clickHolder.push(this.x, this.y);
                   }
-                  else if (clickHolder.length == 2) { // if there was a piece cliked before 
-                    clickHolder[0] = this.x; //we wanna update the parameters
+                  else if (clickHolder.length == 2) {  
+                    clickHolder[0] = this.x; 
                     clickHolder[1] = this.y;
                   }
                 }
       
-                else if(this.playerInfo == 2) { //we do the same when it's player two's turn
-                  if(clickHolder2.length < 2) { //if there was no piece cliked before
-                    clickHolder2.push(this.x, this.y); // //we wanna grab its parameters to be used later when comparing
+                else if(this.playerInfo == 2) { 
+                  if(clickHolder2.length < 2) { 
+                    clickHolder2.push(this.x, this.y);
                   }
-                  else if (clickHolder2.length == 2) { // if there was a piece cliked before
-                    clickHolder2[0] = this.x; //we wanna update the parameters
+                  else if (clickHolder2.length == 2) {
+                    clickHolder2[0] = this.x;
                     clickHolder2[1] = this.y;
                   }
                 }
       
-                else if(this.playerInfo == 3) { //we do the same when it's player two's turn
-                  if(playerCheck.length < 2) { //if there was no piece cliked before
-                    playerCheck.push(this.x, this.y); // //we wanna grab its parameters to be used later when comparing
+                else if(this.playerInfo == 3) { 
+                  if(playerCheck.length < 2) {
+                    playerCheck.push(this.x, this.y);
                   }
-                  else if (playerCheck.length == 2) { // if there was a piece cliked before
-                    playerCheck[0] = this.x; //we wanna update the parameters
+                  else if (playerCheck.length == 2) {
+                    playerCheck[0] = this.x;
                     playerCheck[1] = this.y;
                   }
                 }
       
-                else if(this.playerInfo == 4) { //we do the same when it's player two's turn
-                  if(opponentCheck.length < 2) { //if there was no piece cliked before
-                    opponentCheck.push(this.x, this.y); // //we wanna grab its parameters to be used later when comparing
+                else if(this.playerInfo == 4) { 
+                  if(opponentCheck.length < 2) {
+                    opponentCheck.push(this.x, this.y); 
                   }
-                  else if (opponentCheck.length == 2) { // if there was a piece cliked before
-                    opponentCheck[0] = this.x; //we wanna update the parameters
+                  else if (opponentCheck.length == 2) {
+                    opponentCheck[0] = this.x;
                     opponentCheck[1] = this.y;
                   }
                 }
@@ -151,7 +151,6 @@ class example1 extends Phaser.Scene {
       
                 //this is what happens when the player clicks to where they want to move the selected piece
                 else if(this.playerInfo === 0) {
-                  //checks if it's players one's turn
                     if(clickHolder.length !== 0) {
                       //checks if moved to the next square on the left or right
                       if (this.x  == clickHolder[0] + 60 &&  this.y  == clickHolder[1] - 60 || this.x  == clickHolder[0] - 60 &&  this.y  == clickHolder[1] - 60) {
@@ -164,6 +163,7 @@ class example1 extends Phaser.Scene {
                           }else if (rectangles[i].x == this.x && rectangles[i].y == this.y) {
                             rectangles[i].playerInfo = 1;
                           }
+                          //when the piece reaches the final raw I change the player info so that it becomes a king
                           else if(this.y == 40) {
                             this.playerInfo = 3;                            
                           }
@@ -172,36 +172,13 @@ class example1 extends Phaser.Scene {
                         
                       }
       
-                      // else if ( this.x  == clickHolder[0] + 60 &&  this.y  == clickHolder[1] + 60 || this.x  == clickHolder[0] - 60 &&  this.y  == clickHolder[1] + 60 ) {
-                      //   for (var i = 0; i < rectangles.length; i++) {
-                      //     if(rectangles[i].x == clickHolder[0] && rectangles[i].y == clickHolder[1] ) {
-                      //       rectangles[i].playerInfo = 0;
-                      //       clickHolder.length = 0;
+                     
       
-                      //     }else if (rectangles[i].x == this.x && rectangles[i].y == this.y) {
-                      //       rectangles[i].playerInfo = 3;
-                      //     }
-                      //   }
-                      // }
-      
-                      // else if ( this.x  == clickHolder[0] + 60 &&  this.y  == clickHolder[1] - 60 || this.x  == clickHolder[0] - 60 &&  this.y  == clickHolder[1] - 60 ) {
-                      //   for (var i = 0; i < rectangles.length; i++) {
-                      //     if(rectangles[i].x == clickHolder[0] && rectangles[i].y == clickHolder[1] ) {
-                      //       rectangles[i].playerInfo = 0;
-                      //       clickHolder.length = 0;
-      
-                      //     }else if (rectangles[i].x == this.x && rectangles[i].y == this.y) {
-                      //       rectangles[i].playerInfo = 3;
-                      //     }
-                      //   }
-                      // }
-      
-                      //checks if moved to the second square right
+                      //checks if moved to the second square right and oponent's piece
                       else if (this.x  == clickHolder[0] + 120 &&  this.y  == clickHolder[1] - 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == clickHolder[0] + 60 && rectangles[i].y == clickHolder[1] - 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
                               for(var j = 0; j < rectangles.length; j++) {
                                  if (rectangles[j].x == clickHolder[0] + 120 && rectangles[j].y == clickHolder[1] - 120) {
@@ -220,6 +197,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour.length = 0;
                                 }
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 40) {
                                   this.playerInfo = 3;                            
                                 }
@@ -232,11 +210,11 @@ class example1 extends Phaser.Scene {
                         }
       
                       }
+                      //checks if moved to the second square left and take oponet's piece
                       else if (this.x  == clickHolder[0] - 120 &&  this.y  == clickHolder[1] - 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == clickHolder[0] - 60 && rectangles[i].y == clickHolder[1] - 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
                               for(var j = 0; j < rectangles.length; j++) {
                                 if (rectangles[j].x == clickHolder[0] - 120 && rectangles[j].y == clickHolder[1] - 120) {
@@ -254,6 +232,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour.length = 0;
                                 }
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 40) {
                                   this.playerInfo = 3;                            
                                 }
@@ -269,26 +248,8 @@ class example1 extends Phaser.Scene {
       
                     }
       
-                    if(playerCheck.length !== 0) {
-                      //checks if moved to the next square on the left or right
-                      // if (this.x  == clickHolder[0] + 60 &&  this.y  == clickHolder[1] - 60 || this.x  == clickHolder[0] - 60 &&  this.y  == clickHolder[1] - 60) {
-                      //   for (var i = 0; i < rectangles.length; i++) {
-                      //     if(rectangles[i].x == clickHolder[0] && rectangles[i].y == clickHolder[1] ) {
-                      //       rectangles[i].playerInfo = 0;
-                      //       clickHolder.length = 0;
-      
-      
-                      //     }else if (rectangles[i].x == this.x && rectangles[i].y == this.y) {
-                      //       rectangles[i].playerInfo = 1;
-                      //     }
-                      //     else if(this.y == 80) {
-                      //       this.playerInfo = 3;                            
-                      //     }
-                          
-                      //   }
-                        
-                      // }
-      
+                    if(playerCheck.length !== 0) {  
+                      //checks if moved to the next square left and rigth and there's no piece to take 
                       if (this.x  == playerCheck[0] + 60 &&  this.y  == playerCheck[1] + 60 || this.x  == playerCheck[0] - 60 &&  this.y  == playerCheck[1] + 60 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if(rectangles[i].x == playerCheck[0] && rectangles[i].y == playerCheck[1] ) {
@@ -313,12 +274,11 @@ class example1 extends Phaser.Scene {
                         }
                       }
       
-                      //checks if moved to the second square right
+                      //checks if moved to the second square right and take oponent's piece
                       else if (this.x  == playerCheck[0] + 120 &&  this.y  == playerCheck[1] - 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == playerCheck[0] + 60 && rectangles[i].y == playerCheck[1] - 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
                               for(var j = 0; j < rectangles.length; j++) {
                                  if (rectangles[j].x == playerCheck[0] + 120 && rectangles[j].y == playerCheck[1] - 120) {
@@ -345,11 +305,11 @@ class example1 extends Phaser.Scene {
                         }
       
                       }
+                      //checks if moved to the second square left and take oponent's piece
                       else if (this.x  == playerCheck[0] - 120 &&  this.y  == playerCheck[1] - 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == playerCheck[0] - 60 && rectangles[i].y == playerCheck[1] - 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
                               for(var j = 0; j < rectangles.length; j++) {
                                 if (rectangles[j].x == playerCheck[0] - 120 && rectangles[j].y == playerCheck[1] - 120) {
@@ -375,13 +335,13 @@ class example1 extends Phaser.Scene {
                         }
                         
                       }
-      
+                      
+                      //checks if moved to the second square left and take oponent's piece
       
                       else if (this.x  == playerCheck[0] - 120 &&  this.y  == playerCheck[1] + 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == playerCheck[0] - 60 && rectangles[i].y == playerCheck[1] + 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
       
                               for(var j = 0; j < rectangles.length; j++) {
@@ -393,12 +353,12 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 3;
                                   playerCheck.length = 0;
                                 }
-      
                                 else if (rectangles[j].x == neighbour[0] && rectangles[j].y == neighbour[1]) {
                                   rectangles[j].playerInfo = 0;
                                   neighbour.length = 0;
                                 }
-      
+                                
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
@@ -410,13 +370,12 @@ class example1 extends Phaser.Scene {
                         }
                         
                       }
-      
+                    //checks if moved to the second square right and take oponent's piece
       
                       else if (this.x  == playerCheck[0] + 120 &&  this.y  == playerCheck[1] + 120 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == playerCheck[0] + 60 && rectangles[i].y == playerCheck[1] + 60) {
                             neighbour.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour[2] == 2 || neighbour[2] == 4) {
       
                               for(var j = 0; j < rectangles.length; j++) {
@@ -433,7 +392,8 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour.length = 0;
                                 }
-      
+                                
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
@@ -445,36 +405,14 @@ class example1 extends Phaser.Scene {
                         }
                         
                       }
-                      
-                      //continue here
-      
-      
                     }
       
       
       
-      
+                    //This repeats the steps above but for the second player
       
                     else if(opponentCheck.length !== 0) {
-                      //checks if moved to the next square on the left or right
-                      // if (this.x  == clickHolder[0] + 60 &&  this.y  == clickHolder[1] - 60 || this.x  == clickHolder[0] - 60 &&  this.y  == clickHolder[1] - 60) {
-                      //   for (var i = 0; i < rectangles.length; i++) {
-                      //     if(rectangles[i].x == clickHolder[0] && rectangles[i].y == clickHolder[1] ) {
-                      //       rectangles[i].playerInfo = 0;
-                      //       clickHolder.length = 0;
-      
-      
-                      //     }else if (rectangles[i].x == this.x && rectangles[i].y == this.y) {
-                      //       rectangles[i].playerInfo = 1;
-                      //     }
-                      //     else if(this.y == 80) {
-                      //       this.playerInfo = 3;                            
-                      //     }
-                          
-                      //   }
-                        
-                      // }
-      
+
                       if (this.x  == opponentCheck[0] + 60 &&  this.y  == opponentCheck[1] + 60 || this.x  == opponentCheck[0] - 60 &&  this.y  == opponentCheck[1] + 60 ) {
                         for (var i = 0; i < rectangles.length; i++) {
                           if(rectangles[i].x == opponentCheck[0] && rectangles[i].y == opponentCheck[1] ) {
@@ -505,7 +443,6 @@ class example1 extends Phaser.Scene {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == opponentCheck[0] + 60 && rectangles[i].y == opponentCheck[1] - 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
                               for(var j = 0; j < rectangles.length; j++) {
                                  if (rectangles[j].x == opponentCheck[0] + 120 && rectangles[j].y == opponentCheck[1] - 120) {
@@ -525,8 +462,6 @@ class example1 extends Phaser.Scene {
                               }
                             }
                           }
-      
-      
                         }
       
                       }
@@ -534,7 +469,6 @@ class example1 extends Phaser.Scene {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == opponentCheck[0] - 60 && rectangles[i].y == opponentCheck[1] - 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
                               for(var j = 0; j < rectangles.length; j++) {
                                 if (rectangles[j].x == opponentCheck[0] - 120 && rectangles[j].y == opponentCheck[1] - 120) {
@@ -566,7 +500,6 @@ class example1 extends Phaser.Scene {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == opponentCheck[0] - 60 && rectangles[i].y == opponentCheck[1] + 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
       
                               for(var j = 0; j < rectangles.length; j++) {
@@ -583,7 +516,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour2.length = 0;
                                 }
-      
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
@@ -601,7 +534,6 @@ class example1 extends Phaser.Scene {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == opponentCheck[0] + 60 && rectangles[i].y == opponentCheck[1] + 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
       
                               for(var j = 0; j < rectangles.length; j++) {
@@ -618,7 +550,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour2.length = 0;
                                 }
-      
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
@@ -630,14 +562,7 @@ class example1 extends Phaser.Scene {
                         }
                         
                       }
-                      
-                      //continue here
-      
-      
                     }
-      
-      
-      
       
                       if(clickHolder2.length !== 0) {
                         if (this.x  == clickHolder2[0] + 60 &&  this.y  == clickHolder2[1] + 60 || this.x  == clickHolder2[0] - 60 &&  this.y  == clickHolder2[1] + 60) {
@@ -647,6 +572,7 @@ class example1 extends Phaser.Scene {
                               clickHolder2.length = 0;
       
                             } 
+                            //when the piece reaches the final raw I change the player info so that it becomes a king
                             else if(this.y == 460) {
                               this.playerInfo = 4;                         
                             }
@@ -658,11 +584,9 @@ class example1 extends Phaser.Scene {
       
       
                       else if (this.x  == clickHolder2[0] + 120 &&  this.y  == clickHolder2[1] + 120 ) {
-                        //console.log(this.x);
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == clickHolder2[0] + 60 && rectangles[i].y == clickHolder2[1] + 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
                               for(var j = 0; j < rectangles.length; j++) {
       
@@ -674,6 +598,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour2.length = 0;
                                 }
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
@@ -693,7 +618,6 @@ class example1 extends Phaser.Scene {
                         for (var i = 0; i < rectangles.length; i++) {
                           if (rectangles[i].x == clickHolder2[0] - 60 && rectangles[i].y == clickHolder2[1] + 60) {
                             neighbour2.push(rectangles[i].x, rectangles[i].y, rectangles[i].playerInfo);
-                            //console.log(neighbour);
                             if(neighbour2[2] == 1 || neighbour2[2] == 3) {
                               for(var j = 0; j < rectangles.length; j++) {
                                 if(rectangles[j].x == clickHolder2[0] && rectangles[j].y == clickHolder2[1] ) {
@@ -710,7 +634,7 @@ class example1 extends Phaser.Scene {
                                   rectangles[j].playerInfo = 0;
                                   neighbour2.length = 0;
                                 }
-      
+                                //when the piece reaches the final raw I change the player info so that it becomes a king
                                 else if(this.y == 460) {
                                   this.playerInfo = 4;
                                 }
